@@ -2,5 +2,5 @@
   "name": "BALTHASAR",
   "interval": 6,
   "offset": 1,
-  "device": "cuda"
+  "device": "cpu"
 }

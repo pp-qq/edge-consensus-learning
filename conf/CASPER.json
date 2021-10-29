@@ -2,5 +2,5 @@
   "name": "CASPER",
   "interval": 6,
   "offset": 3,
-  "device": "cuda"
+  "device": "cpu"
 }
