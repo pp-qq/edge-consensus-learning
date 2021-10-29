@@ -2,7 +2,7 @@
   "nodes": [
     {
       "name": "CASPER",
-      "addr": "localhost",
+      "addr": "34.90.222.14",
       "port": "9997",
       "edges": [
         "BALTHASAR",
@@ -11,7 +11,7 @@
     },
     {
       "name": "BALTHASAR",
-      "addr": "localhost",
+      "addr": "35.231.21.91",
       "port": "9998",
       "edges": [
         "CASPER",
@@ -20,7 +20,7 @@
     },
     {
       "name": "MELCHIOR",
-      "addr": "localhost",
+      "addr": "104.197.16.225",
       "port": "9999",
       "edges": [
         "BALTHASAR",
