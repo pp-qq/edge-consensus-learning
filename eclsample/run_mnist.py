@@ -53,7 +53,7 @@ class Kings:
         # "CASPER": [True, True, True, False, False, False, False, False, False, False],
         # "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
         "ALPHA": [False, False, False, False, False, True, True, True, True, True],
-        "MELCHIOR": [True, True, True, True, True, False, False, False, False, False]
+        "BETA": [True, True, True, True, True, False, False, False, False, False]
     }
 
     def __init__(self, name, nodes, algorithm="pdmm", device="cpu", interval=6, offset=0, log_dir="/log/"):
