@@ -49,9 +49,11 @@ class Net(nn.Module):
 class Kings:
     classes = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
     train_mask_list = {
-        "BALTHASAR": [False, False, False, True, True, True, False, False, False, False],
-        "CASPER": [True, True, True, False, False, False, False, False, False, False],
-        "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
+        # "BALTHASAR": [False, False, False, True, True, True, False, False, False, False],
+        # "CASPER": [True, True, True, False, False, False, False, False, False, False],
+        # "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
+        "ALPHA": [False, False, False, False, False, True, True, True, True, True],
+        "MELCHIOR": [True, True, True, True, True, False, False, False, False, False]
     }
 
     def __init__(self, name, nodes, algorithm="pdmm", device="cpu", interval=6, offset=0, log_dir="/log/"):
@@ -60,16 +62,21 @@ class Kings:
         self.device = device
 
         if algorithm == "gossip":
-            self.optimizer = GossipSGD(name, nodes, device, self.model, interval, offset)
+            self.optimizer = GossipSGD(
+                name, nodes, device, self.model, interval, offset)
         elif algorithm == "admm":
-            self.optimizer = AdmmSGD(name, nodes, device, self.model, interval, offset)
+            self.optimizer = AdmmSGD(
+                name, nodes, device, self.model, interval, offset)
         else:  # pdmm_vanilla
-            self.optimizer = PdmmSGD(name, nodes, device, self.model, interval, offset)
+            self.optimizer = PdmmSGD(
+                name, nodes, device, self.model, interval, offset)
 
         self.transform = transforms.Compose(
             [transforms.ToTensor(), transforms.Normalize((0.5, ), (0.5, ))])
-        test_set = torchvision.datasets.MNIST(root='./data', train=False, download=True, transform=self.transform)
-        self.test_loader = torch.utils.data.DataLoader(test_set, batch_size=100, shuffle=False, num_workers=2)
+        test_set = torchvision.datasets.MNIST(
+            root='./data', train=False, download=True, transform=self.transform)
+        self.test_loader = torch.utils.data.DataLoader(
+            test_set, batch_size=100, shuffle=False, num_workers=2)
 
         self.mask_list = self.train_mask_list[name]
         self.latest_epoch = 0
@@ -81,17 +88,21 @@ class Kings:
         self.writer_loss = csv.writer(self.log_file_loss, lineterminator='\n')
 
         self.log_file_result = open(log_dir + "/" + name + '_result.csv', 'w')
-        self.writer_result = csv.writer(self.log_file_result, lineterminator='\n')
+        self.writer_result = csv.writer(
+            self.log_file_result, lineterminator='\n')
 
     def train(self, max_epoch=50, batch_size=100, test_interval=10):
         self.logger.info('Training start!!')
         criterion = nn.CrossEntropyLoss()
 
         # Data Load
-        train_set = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=self.transform)
+        train_set = torchvision.datasets.MNIST(
+            root='./data', train=True, download=True, transform=self.transform)
         mask = [self.mask_list[i] for i in train_set.targets]
-        sampler = torch.utils.data.sampler.WeightedRandomSampler(mask, len(train_set))
-        train_loader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, sampler=sampler, num_workers=2)
+        sampler = torch.utils.data.sampler.WeightedRandomSampler(
+            mask, len(train_set))
+        train_loader = torch.utils.data.DataLoader(
+            train_set, batch_size=batch_size, sampler=sampler, num_workers=2)
 
         for epoch in range(max_epoch):   # loop over the dataset multiple times
             running_loss = 0.0
@@ -143,7 +154,8 @@ class Kings:
             latest_test_loss = test_loss / epc_cnt / 100
             self.logger.info('[%03d] loss: %.3f/%.3f, diff: %.8f, time: %.2fsec' %
                              (self.latest_epoch, latest_loss, latest_test_loss, latest_diff, end_time - start_time))
-            self.writer_loss.writerow([self.latest_epoch, latest_loss, latest_test_loss, latest_diff])
+            self.writer_loss.writerow(
+                [self.latest_epoch, latest_loss, latest_test_loss, latest_diff])
 
             if self.latest_epoch == 1 or self.latest_epoch % test_interval == 0:
                 self.test()
@@ -177,7 +189,8 @@ class Kings:
 
         for i in range(10):
             class_result = 100 * class_correct[i] / class_total[i]
-            self.logger.info('Accuracy of %5s : %2d %%' % (Kings.classes[i], class_result))
+            self.logger.info('Accuracy of %5s : %2d %%' %
+                             (Kings.classes[i], class_result))
             log_result.append(class_result)
 
         self.writer_result.writerow(log_result)

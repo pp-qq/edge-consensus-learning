@@ -1,0 +1,20 @@
+{
+  "nodes": [
+    {
+      "name": "ALPHA",
+      "addr": "35.196.99.149",
+      "port": "9997",
+      "edges": [
+        "BETA"
+      ]
+    },
+    {
+      "name": "BETA",
+      "addr": "35.233.134.108",
+      "port": "9998",
+      "edges": [
+        "ALPHA"
+      ]
+    }
+  ]
+}
