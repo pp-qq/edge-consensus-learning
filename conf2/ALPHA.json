@@ -2,5 +2,5 @@
   "name": "ALPHA",
   "interval": 6,
   "offset": 1,
-  "device": "cpu"
+  "device": "gpu:0"
 }
