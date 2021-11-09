@@ -64,11 +64,14 @@ class Net(nn.Module):
 
 
 class Kings:
-    classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+    classes = ('plane', 'car', 'bird', 'cat', 'deer',
+               'dog', 'frog', 'horse', 'ship', 'truck')
     train_mask_list = {
-        "BALTHASAR": [True, True, True, True, True, False, False, True, False, False],
-        "CASPER": [True, True, True, True, False, True, False, False, True, False],
-        "MELCHIOR": [True, True, True, True, False, False, True, False, False, True]
+        "BALTHASAR": [False, False, False, True, True, True, False, False, False, False],
+        "CASPER": [True, True, True, False, False, False, False, False, False, False],
+        "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
+        # "ALPHA": [False, False, False, False, False, True, True, True, True, True],
+        # "BETA": [True, True, True, True, True, False, False, False, False, False]
     }
 
     def __init__(self, name, nodes, algorithm="pdmm", device="cpu",
@@ -79,20 +82,29 @@ class Kings:
         self.batch_size = batch_size
 
         if algorithm == "gossip":
-            self.optimizer = GossipSGD(name, nodes, device, self.model, interval, offset)
+            self.optimizer = GossipSGD(
+                name, nodes, device, self.model, interval, offset)
         elif algorithm == "admm":
-            self.optimizer = AdmmSGD(name, nodes, device, self.model, interval, offset)
+            self.optimizer = AdmmSGD(
+                name, nodes, device, self.model, interval, offset)
         else:  # pdmm_vanilla
-            self.optimizer = PdmmSGD(name, nodes, device, self.model, interval, offset)
+            self.optimizer = PdmmSGD(
+                name, nodes, device, self.model, interval, offset)
 
         # Data Load
-        transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-        train_set = torchvision.datasets.CIFAR10(root='./data', train=True, download=True, transform=transform)
+        transform = transforms.Compose(
+            [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+        train_set = torchvision.datasets.CIFAR10(
+            root='./data', train=True, download=True, transform=transform)
         mask = [self.train_mask_list[name][i] for i in train_set.targets]
-        sampler = torch.utils.data.sampler.WeightedRandomSampler(mask, len(train_set))
-        self.train_loader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, sampler=sampler, num_workers=2)
-        test_set = torchvision.datasets.CIFAR10(root='./data', train=False, download=True, transform=transform)
-        self.test_loader = torch.utils.data.DataLoader(test_set, batch_size=batch_size, shuffle=True, num_workers=2)
+        sampler = torch.utils.data.sampler.WeightedRandomSampler(
+            mask, len(train_set))
+        self.train_loader = torch.utils.data.DataLoader(
+            train_set, batch_size=batch_size, sampler=sampler, num_workers=2)
+        test_set = torchvision.datasets.CIFAR10(
+            root='./data', train=False, download=True, transform=transform)
+        self.test_loader = torch.utils.data.DataLoader(
+            test_set, batch_size=batch_size, shuffle=True, num_workers=2)
 
         self.latest_epoch = 0
         if not os.path.isdir(log_dir):
@@ -102,12 +114,14 @@ class Kings:
         self.writer_loss = csv.writer(self.log_file_loss, lineterminator='\n')
 
         self.log_file_result = open(log_dir + "/" + name + '_result.csv', 'w')
-        self.writer_result = csv.writer(self.log_file_result, lineterminator='\n')
+        self.writer_result = csv.writer(
+            self.log_file_result, lineterminator='\n')
 
     def train(self, max_epoch=200, test_interval=10):
         self.logger.info('Training start!!')
         criterion = nn.CrossEntropyLoss()
-        scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
+        scheduler = torch.optim.lr_scheduler.StepLR(
+            self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
 
         for epoch in range(max_epoch):   # loop over the dataset multiple times
             running_loss = 0.0
@@ -159,7 +173,8 @@ class Kings:
             latest_test_loss = test_loss / epc_cnt / self.batch_size
             self.logger.info('[%03d] loss: %.3f/%.3f, diff: %.8f, time: %.2fsec' %
                              (self.latest_epoch, latest_loss, latest_test_loss, latest_diff, end_time - start_time))
-            self.writer_loss.writerow([self.latest_epoch, latest_loss, latest_test_loss, latest_diff])
+            self.writer_loss.writerow(
+                [self.latest_epoch, latest_loss, latest_test_loss, latest_diff])
 
             if self.latest_epoch == 1 or self.latest_epoch % test_interval == 0:
                 self.test()
@@ -195,7 +210,8 @@ class Kings:
         log_result = []
         log_result.append(self.latest_epoch)
 
-        self.logger.info('Accuracy on the 10000 test images: %d %%' % (100 * correct / total))
+        self.logger.info('Accuracy on the 10000 test images: %d %%' %
+                         (100 * correct / total))
         for i in range(10):
             class_result = 100 * class_correct[i] / class_total[i]
             self.logger.info('%5s : %2d %%' % (Kings.classes[i], class_result))
@@ -222,7 +238,8 @@ def main():
         conf = json.load(f)
         nodes = conf["nodes"]
 
-    king = Kings(name, nodes, args.algorithm, device, 100, interval, offset, "log/")
+    king = Kings(name, nodes, args.algorithm, device,
+                 100, interval, offset, "log/")
     king.train()
 
 
