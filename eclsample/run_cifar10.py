@@ -67,11 +67,11 @@ class Kings:
     classes = ('plane', 'car', 'bird', 'cat', 'deer',
                'dog', 'frog', 'horse', 'ship', 'truck')
     train_mask_list = {
-        "BALTHASAR": [False, False, False, True, True, True, False, False, False, False],
-        "CASPER": [True, True, True, False, False, False, False, False, False, False],
-        "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
-        # "ALPHA": [False, False, False, False, False, True, True, True, True, True],
-        # "BETA": [True, True, True, True, True, False, False, False, False, False]
+        # "BALTHASAR": [False, False, False, True, True, True, False, False, False, False],
+        # "CASPER": [True, True, True, False, False, False, False, False, False, False],
+        # "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
+        "ALPHA": [False, False, False, False, False, True, True, True, True, True],
+        "BETA": [True, True, True, True, True, False, False, False, False, False]
     }
 
     def __init__(self, name, nodes, algorithm="pdmm", device="cpu",
