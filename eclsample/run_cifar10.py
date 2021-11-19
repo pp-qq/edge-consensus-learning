@@ -117,7 +117,7 @@ class Kings:
         self.writer_result = csv.writer(
             self.log_file_result, lineterminator='\n')
 
-    def train(self, max_epoch=100, test_interval=10):
+    def train(self, max_epoch=100, test_interval=1):
         self.logger.info('Training start!!')
         criterion = nn.CrossEntropyLoss()
         scheduler = torch.optim.lr_scheduler.StepLR(
