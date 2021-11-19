@@ -10,7 +10,8 @@ setup(
     entry_points={
         "console_scripts": [
             "eclmnist = eclsample.run_mnist:main",
-            "eclcifar10 = eclsample.run_cifar10:main",
+            "eclcifar10 = eclsample.run_cifar10:main"
+            "eclcifar100 = eclsample.run_cifar100:main",
         ]
     },
     license='',

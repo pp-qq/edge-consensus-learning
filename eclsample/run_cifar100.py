@@ -64,14 +64,42 @@ class Net(nn.Module):
 
 
 class Kings:
-    classes = ('plane', 'car', 'bird', 'cat', 'deer',
-               'dog', 'frog', 'horse', 'ship', 'truck')
+    classes = ('beaver', 'dolphin', 'otter', 'seal', 'whale', 'aquarium fish', 'flatfish', 'ray', 'shark', 'trout',
+               'orchids', 'poppies', 'roses', 'sunflowers', 'tulips', 'bottles', 'bowls', 'cans', 'cups', 'plates',
+               'apples', 'mushrooms', 'oranges', 'pears', 'sweet peppers', 'clock', 'computer keyboard', 'lamp', 'telephone', 'television',
+               'bed', 'chair', 'couch', 'table', 'wardrobe', 'bee', 'beetle', 'butterfly', 'caterpillar', 'cockroach',
+               'bear', 'leopard', 'lion', 'tiger', 'wolf', 'bridge', 'castle', 'house', 'road', 'skyscraper',
+               'cloud', 'forest', 'mountain', 'plain', 'sea', 'camel', 'cattle', 'chimpanzee', 'elephant', 'kangaroo',
+               'fox', 'porcupine', 'possum', 'raccoon', 'skunk', 'crab', 'lobster', 'snail', 'spider', 'worm',
+               'baby', 'boy', 'girl', 'man', 'woman', 'crocodile', 'dinosaur', 'lizard', 'snake', 'turtle',
+               'hamster', 'mouse', 'rabbit', 'shrew', 'squirrel', 'maple', 'oak', 'palm', 'pine', 'willow',
+               'bicycle', 'bus', 'motorcycle', 'pickup truck', 'train', 'lawn-mower', 'rocket', 'streetcar', 'tank', 'tractor')
+
     train_mask_list = {
         # "BALTHASAR": [False, False, False, True, True, True, False, False, False, False],
         # "CASPER": [True, True, True, False, False, False, False, False, False, False],
         # "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
-        "ALPHA": [False, False, False, False, False, True, True, True, True, True],
-        "BETA": [True, True, True, True, True, False, False, False, False, False]
+        "ALPHA": [False, False, False, False, False, False, False, False, False, False,\
+                  False, False, False, False, False, False, False, False, False, False,\
+                  False, False, False, False, False, False, False, False, False, False,\
+                  False, False, False, False, False, False, False, False, False, False,\
+                  False, False, False, False, False, False, False, False, False, False,\
+                  True, True, True, True, True, True, True, True, True, True,\
+                  True, True, True, True, True, True, True, True, True, True,\
+                  True, True, True, True, True, True, True, True, True, True,\
+                  True, True, True, True, True, True, True, True, True, True,\
+                  True, True, True, True, True, True, True, True, True, True],
+        "BETA": [True, True, True, True, True, True, True, True, True, True,\
+                 True, True, True, True, True, True, True, True, True, True,\
+                 True, True, True, True, True, True, True, True, True, True,\
+                 True, True, True, True, True, True, True, True, True, True,\
+                 True, True, True, True, True, True, True, True, True, True,\
+                 False, False, False, False, False, False, False, False, False, False,\
+                 False, False, False, False, False, False, False, False, False, False,\
+                 False, False, False, False, False, False, False, False, False, False,\
+                 False, False, False, False, False, False, False, False, False, False,\
+                 False, False, False, False, False, False, False, False, False, False,\
+                 ]
     }
 
     def __init__(self, name, nodes, algorithm="pdmm", device="cpu",
@@ -94,7 +122,7 @@ class Kings:
         # Data Load
         transform = transforms.Compose(
             [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-        train_set = torchvision.datasets.CIFAR10(
+        train_set = torchvision.datasets.CIFAR100(
             root='./data', train=True, download=True, transform=transform)
         mask = [self.train_mask_list[name][i] for i in train_set.targets]
         sampler = torch.utils.data.sampler.WeightedRandomSampler(
@@ -212,7 +240,7 @@ class Kings:
 
         self.logger.info('Accuracy on the 10000 test images: %d %%' %
                          (100 * correct / total))
-        for i in range(10):
+        for i in range(100):
             class_result = 100 * class_correct[i] / class_total[i]
             self.logger.info('%5s : %2d %%' % (Kings.classes[i], class_result))
             log_result.append(class_result)
