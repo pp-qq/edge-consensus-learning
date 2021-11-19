@@ -217,6 +217,7 @@ class Kings:
             self.logger.info('%5s : %2d %%' % (Kings.classes[i], class_result))
             log_result.append(class_result)
 
+        log_result.append(100 * correct / total)
         self.writer_result.writerow(log_result)
 
 
