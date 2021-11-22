@@ -50,7 +50,7 @@ class Kings:
     classes = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
     train_mask_list = {
         # "BALTHASAR": [False, False, False, True, True, True, False, False, False, False],
-        # "CASPER": [True, True, True, False, False, False, False, False, False, False],
+        "CASPER": [True, True, True, False, False, False, False, False, False, False],
         # "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
         "ALPHA": [False, False, False, False, False, True, True, True, True, True],
         "BETA": [True, True, True, True, True, False, False, False, False, False]
