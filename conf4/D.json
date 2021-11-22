@@ -2,5 +2,5 @@
   "name": "D",
   "interval": 6,
   "offset": 4,
-  "device": "cpu"
+  "device": "cuda:3"
 }
