@@ -1,5 +1,5 @@
 {
-  "name": "N2",
+  "name": "B",
   "interval": 6,
   "offset": 2,
   "device": "cuda:1"

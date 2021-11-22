@@ -1,43 +1,39 @@
 {
   "nodes": [
     {
-      "name": "N1",
+      "name": "A",
       "addr": "localhost",
       "port": "9997",
       "edges": [
-        "N2",
-        "N3",
-        "N4"
+        "B",
+        "D"
       ]
     },
     {
-      "name": "N2",
+      "name": "B",
       "addr": "localhost",
       "port": "9997",
       "edges": [
-        "N1",
-        "N3",
-        "N4"
+        "A",
+        "C"
       ]
     },
     {
-      "name": "N3",
+      "name": "C",
       "addr": "localhost",
       "port": "9997",
       "edges": [
-        "N1",
-        "N2",
-        "N4"
+        "B",
+        "D"
       ]
     },
     {
-      "name": "N4",
+      "name": "D",
       "addr": "localhost",
       "port": "9997",
       "edges": [
-        "N1",
-        "N2",
-        "N3"
+        "C",
+        "A"
       ]
     }
   ]

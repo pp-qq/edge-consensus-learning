@@ -6,7 +6,8 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    url='https://github.com/nttcslab/edge-consensus-learning',
+    # url='https://github.com/nttcslab/edge-consensus-learning',
+    url='https://github.com/pp-qq/edge-consensus-learning',
     entry_points={
         "console_scripts": [
             "eclmnist = eclsample.run_mnist:main",
