@@ -1,6 +1,6 @@
 {
   "name": "N3",
   "interval": 6,
-  "offset": 5,
+  "offset": 3,
   "device": "cuda:2"
 }
