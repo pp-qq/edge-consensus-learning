@@ -3,7 +3,7 @@
     {
       "name": "A",
       "addr": "localhost",
-      "port": "9997",
+      "port": "9995",
       "edges": [
         "B",
         "D"
@@ -12,7 +12,7 @@
     {
       "name": "B",
       "addr": "localhost",
-      "port": "9997",
+      "port": "9996",
       "edges": [
         "A",
         "C"
@@ -30,10 +30,10 @@
     {
       "name": "D",
       "addr": "localhost",
-      "port": "9997",
+      "port": "9998",
       "edges": [
-        "C",
-        "A"
+        "A",
+        "C"
       ]
     }
   ]
