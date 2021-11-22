@@ -68,7 +68,7 @@ class Kings:
                'dog', 'frog', 'horse', 'ship', 'truck')
     train_mask_list = {
         # "BALTHASAR": [False, False, False, True, True, True, False, False, False, False],
-        # "CASPER": [True, True, True, False, False, False, False, False, False, False],
+        "CASPER": [True, True, True, False, False, False, False, False, False, False],
         # "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
         # "ALPHA": [False, False, False, False, False, True, True, True, True, True],
         # "BETA": [True, True, True, True, True, False, False, False, False, False]
