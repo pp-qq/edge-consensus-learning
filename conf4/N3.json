@@ -1,0 +1,6 @@
+{
+  "name": "N3",
+  "interval": 6,
+  "offset": 5,
+  "device": "cuda:2"
+}

@@ -7,7 +7,7 @@ from .contract import Contract
 
 
 class AdmmSGD(Optimizer):
-    def __init__(self, name, nodes, device, model, interval=10, offset=0, mu=200, eta=0.5, rho=0.1,
+    def __init__(self, name, nodes, device, model, interval=10, offset=0, mu=200, eta=1.0, rho=0.1,
                  grpc_buf_size=524288, grpc_timeout=1.0):
         lr = 1 / mu
         eta_rate = eta / mu

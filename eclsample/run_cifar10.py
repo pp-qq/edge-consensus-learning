@@ -70,8 +70,12 @@ class Kings:
         # "BALTHASAR": [False, False, False, True, True, True, False, False, False, False],
         # "CASPER": [True, True, True, False, False, False, False, False, False, False],
         # "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
-        "ALPHA": [False, False, False, False, False, True, True, True, True, True],
-        "BETA": [True, True, True, True, True, False, False, False, False, False]
+        # "ALPHA": [False, False, False, False, False, True, True, True, True, True],
+        # "BETA": [True, True, True, True, True, False, False, False, False, False]
+        "N1": [True, True, True, False, False, False, False, False, False, False],
+        "N2": [False, False, True, True, True, False, False, False, False, False],
+        "N3": [False, False, False, False, False, True, True, True, False, False],
+        "N4": [False, False, False, False, False, False, False, True, True, True]
     }
 
     def __init__(self, name, nodes, algorithm="pdmm", device="cpu",
