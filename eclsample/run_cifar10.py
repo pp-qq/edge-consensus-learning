@@ -13,6 +13,7 @@ import torch.nn.functional as F
 from edgecons import GossipSGD
 from edgecons import PdmmSGD
 from edgecons import AdmmSGD
+from edgecons import PdmmSGD2
 
 formatter = '%(asctime)s [ECL] %(levelname)s :  %(message)s'
 logging.basicConfig(level=logging.DEBUG, format=formatter)
@@ -90,6 +91,9 @@ class Kings:
                 name, nodes, device, self.model, interval, offset)
         elif algorithm == "admm":
             self.optimizer = AdmmSGD(
+                name, nodes, device, self.model, interval, offset)
+        elif algorithm == "pdmm2":
+            self.optimizer = PdmmSGD2(
                 name, nodes, device, self.model, interval, offset)
         else:  # pdmm_vanilla
             self.optimizer = PdmmSGD(
