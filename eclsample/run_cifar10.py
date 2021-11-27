@@ -128,8 +128,12 @@ class Kings:
     def train(self, max_epoch=105, test_interval=1):
         self.logger.info('Training start!!')
         criterion = nn.CrossEntropyLoss()
-        scheduler = torch.optim.lr_scheduler.StepLR(
-            self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
+        if self.name == 'A':
+            scheduler = torch.optim.lr_scheduler.StepLR(
+                self.optimizer, step_size=10, gamma=0.8, last_epoch=100)
+        else:
+            scheduler = torch.optim.lr_scheduler.StepLR(
+                self.optimizer, step_size=10, gamma=0.5, last_epoch=100)
 
         for epoch in range(max_epoch):   # loop over the dataset multiple times
             running_loss = 0.0
