@@ -85,6 +85,7 @@ class Kings:
         self.model = Net().to(device)
         self.device = device
         self.batch_size = batch_size
+        self.name = name
 
         if algorithm == "gossip":
             self.optimizer = GossipSGD(
