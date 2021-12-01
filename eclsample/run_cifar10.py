@@ -131,7 +131,7 @@ class Kings:
         criterion = nn.CrossEntropyLoss()
         if self.name == 'A':
             scheduler = torch.optim.lr_scheduler.StepLR(
-                self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
+                self.optimizer, step_size=10, gamma=0.8, last_epoch=100)
         else:
             scheduler = torch.optim.lr_scheduler.StepLR(
                 self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
