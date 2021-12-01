@@ -10,9 +10,9 @@ class PdmmSGD2(Optimizer):
     def __init__(self, name, nodes, device, model, interval=10, offset=0, mu=200, eta=5.0, rho=1.0,
                  grpc_buf_size=524288, grpc_timeout=1.0):
         if name == 'A':
-            mu = 300
-        else:
             mu = 500
+        else:
+            mu = 700
         lr = 1 / mu
         eta_rate = eta / mu
         defaults = dict(lr=lr, eta=eta, rho=rho,
