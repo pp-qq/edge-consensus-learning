@@ -165,7 +165,10 @@ class Kings:
                 epc_cnt += 1
 
             end_time = time.time()
-            scheduler.step()
+            if self.name == "A":
+                scheduler.step()
+            else:
+                scheduler.step(epoch+1)
             self.latest_epoch = epoch + 1
             latest_loss = running_loss / epc_cnt
             diff = self.optimizer.diff()
