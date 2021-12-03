@@ -12,7 +12,7 @@ class PdmmSGD2(Optimizer):
         if name == 'A':
             mu = 500
         else:
-            mu = 100000
+            mu = 1000
         lr = 1 / mu
         eta_rate = eta / mu
         defaults = dict(lr=lr, eta=eta, rho=rho,
