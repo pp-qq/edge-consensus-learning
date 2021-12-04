@@ -131,12 +131,13 @@ class Kings:
         self.logger.info('Training start!!')
         criterion = nn.CrossEntropyLoss()
         if self.name == 'A':
-            scheduler = torch.optim.lr_scheduler.StepLR(
-                self.optimizer, step_size=10, gamma=0.8, last_epoch=100)
+            # scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=10, gamma=0.8, last_epoch=100)
+            scheduler = CosineLRScheduler(
+                self.optimizer, t_initial=100, lr_min=2e-5, warmup_t=10, warmup_lr_init=5e-5, warmup_prefix=True)
         else:
-            scheduler = torch.optim.lr_scheduler.StepLR(
-                self.optimizer, step_size=10, gamma=0.6, last_epoch=100)
-            # scheduler = CosineLRScheduler(self.optimizer, t_initial=100, lr_min=2e-5, warmup_t=20, warmup_lr_init=5e-5, warmup_prefix=True)
+            # scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=10, gamma=0.6, last_epoch=100)
+            scheduler = CosineLRScheduler(
+                self.optimizer, t_initial=100, lr_min=2e-5, warmup_t=10, warmup_lr_init=5e-5, warmup_prefix=True)
 
         for epoch in range(max_epoch):   # loop over the dataset multiple times
             running_loss = 0.0
@@ -166,13 +167,14 @@ class Kings:
 
             end_time = time.time()
 
-            scheduler.step()
+            # scheduler.step()
             '''
             if self.name == "A":
                 scheduler.step()
             else:
                 scheduler.step(epoch+1)
             '''
+            scheduler.step(epoch+1)
 
             self.latest_epoch = epoch + 1
             latest_loss = running_loss / epc_cnt
