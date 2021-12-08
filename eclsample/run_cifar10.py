@@ -127,19 +127,19 @@ class Kings:
         self.writer_result = csv.writer(
             self.log_file_result, lineterminator='\n')
 
-    def train(self, max_epoch=105, test_interval=1):
+    def train(self, max_epoch=210, test_interval=1):
         self.logger.info('Training start!!')
         criterion = nn.CrossEntropyLoss()
         if self.name == 'A':
-            # scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=10, gamma=0.8, last_epoch=100)
+            scheduler = torch.optim.lr_scheduler.StepLR(
+                self.optimizer, step_size=20, gamma=0.95, last_epoch=200)
             # scheduler = CosineLRScheduler(self.optimizer, t_initial=100, lr_min=2e-5, warmup_t=10, warmup_lr_init=5e-5, warmup_prefix=True)
-            scheduler = StepLRScheduler(
-                self.optimizer, decay_t=10, warmup_t=10, warmup_lr_init=1e-4, decay_rate=0.8)
+            # scheduler = StepLRScheduler(self.optimizer, decay_t=10, warmup_t=10, warmup_lr_init=1e-4, decay_rate=0.8)
         else:
-            # scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=10, gamma=0.6, last_epoch=100)
+            scheduler = torch.optim.lr_scheduler.StepLR(
+                self.optimizer, step_size=20, gamma=0.95, last_epoch=200)
             # scheduler = CosineLRScheduler(self.optimizer, t_initial=100, lr_min=2e-5, warmup_t=10, warmup_lr_init=5e-5, warmup_prefix=True)
-            scheduler = StepLRScheduler(
-                self.optimizer, decay_t=10, warmup_t=10, warmup_lr_init=1e-4, decay_rate=0.6)
+            # scheduler = StepLRScheduler(self.optimizer, decay_t=10, warmup_t=10, warmup_lr_init=1e-4, decay_rate=0.6)
 
         for epoch in range(max_epoch):   # loop over the dataset multiple times
             running_loss = 0.0
