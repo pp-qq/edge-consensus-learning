@@ -169,14 +169,14 @@ class Kings:
 
             end_time = time.time()
 
-            # scheduler.step()
+            scheduler.step()
             '''
             if self.name == "A":
                 scheduler.step()
             else:
                 scheduler.step(epoch+1)
             '''
-            scheduler.step(epoch+1)
+            # scheduler.step(epoch+1)
 
             self.latest_epoch = epoch + 1
             latest_loss = running_loss / epc_cnt
