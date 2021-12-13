@@ -74,10 +74,16 @@ class Kings:
         # "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
         # "ALPHA": [False, False, False, False, False, True, True, True, True, True],
         # "BETA": [True, True, True, True, True, False, False, False, False, False]
-        "A": [True, True, True, True, True, True, True, False, False, False],
-        "B": [False, False, False, False, False, False, False, True, False, False],
-        "C": [False, False, False, False, False, False, False, False, True, False],
-        "D": [False, False, False, False, False, False, False, False, False, True]
+        # "A": [True, True, True, True, True, True, True, False, False, False],
+        # "B": [False, False, False, False, False, False, False, True, False, False],
+        # "C": [False, False, False, False, False, False, False, False, True, False],
+        # "D": [False, False, False, False, False, False, False, False, False, True]
+
+        "A": [True, True, True, True, True, False, False, False, False, False],
+        "B": [False, False, True, True, True, True, True, False, False, False],
+        "C": [False, False, False, False, False, True, True, True, True, True],
+        "D": [True, True, False, False, False, False, False, True, True, True]
+
     }
 
     def __init__(self, name, nodes, algorithm="pdmm", device="cpu",
@@ -132,12 +138,12 @@ class Kings:
         criterion = nn.CrossEntropyLoss()
         if self.name == 'A':
             scheduler = torch.optim.lr_scheduler.StepLR(
-                self.optimizer, step_size=10, gamma=0.8, last_epoch=200)
+                self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
             # scheduler = CosineLRScheduler(self.optimizer, t_initial=100, lr_min=2e-5, warmup_t=10, warmup_lr_init=5e-5, warmup_prefix=True)
             # scheduler = StepLRScheduler(self.optimizer, decay_t=10, warmup_t=10, warmup_lr_init=1e-4, decay_rate=0.8)
         else:
             scheduler = torch.optim.lr_scheduler.StepLR(
-                self.optimizer, step_size=10, gamma=0.6, last_epoch=200)
+                self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
             # scheduler = CosineLRScheduler(self.optimizer, t_initial=100, lr_min=2e-5, warmup_t=10, warmup_lr_init=5e-5, warmup_prefix=True)
             # scheduler = StepLRScheduler(self.optimizer, decay_t=10, warmup_t=10, warmup_lr_init=1e-4, decay_rate=0.6)
 
