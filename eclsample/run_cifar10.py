@@ -74,15 +74,21 @@ class Kings:
         # "MELCHIOR": [False, False, False, False, False, False, True, True, True, True]
         # "ALPHA": [False, False, False, False, False, True, True, True, True, True],
         # "BETA": [True, True, True, True, True, False, False, False, False, False]
+
         # "A": [True, True, True, True, True, True, True, False, False, False],
         # "B": [False, False, False, False, False, False, False, True, False, False],
         # "C": [False, False, False, False, False, False, False, False, True, False],
         # "D": [False, False, False, False, False, False, False, False, False, True]
 
-        "A": [True, True, True, True, True, False, False, False, False, False],
-        "B": [False, False, True, True, True, True, True, False, False, False],
-        "C": [False, False, False, False, False, True, True, True, True, True],
-        "D": [True, True, False, False, False, False, False, True, True, True]
+        # "A": [True, True, True, True, True, False, False, False, False, False],
+        # "B": [False, False, True, True, True, True, True, False, False, False],
+        # "C": [False, False, False, False, False, True, True, True, True, True],
+        # "D": [True, True, False, False, False, False, False, True, True, True]
+
+        "A": [True, True, True, True, True, True, True, True, True, True],
+        "B": [True, True, True, True, True, True, True, True, True, True],
+        "C": [True, True, True, True, True, True, True, True, True, True],
+        "D": [True, True, True, True, True, True, True, True, True, True]
 
     }
 
