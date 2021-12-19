@@ -100,7 +100,7 @@ class Kings:
         if name == "A":
             self.batch_size = 100
         else:
-            self.batch_size = 100
+            self.batch_size = 80
         self.name = name
 
         if algorithm == "gossip":
