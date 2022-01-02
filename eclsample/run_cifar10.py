@@ -81,7 +81,7 @@ class Kings:
         # "C": [False, False, False, False, False, False, False, False, True, False],
         # "D": [False, False, False, False, False, False, False, False, False, True]
 
-        "A": [True, True, True, False, True, True, True, False, False, False],
+        "A": [True, True, True, False, False, True, False, True, True, True],
         "B": [False, False, False, True, False, False, False, False, False, False],
         "C": [False, False, False, False, True, False, False, False, False, False],
         "D": [False, False, False, False, False, False, True, False, False, False]
