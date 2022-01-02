@@ -75,10 +75,16 @@ class Kings:
         # "ALPHA": [False, False, False, False, False, True, True, True, True, True],
         # "BETA": [True, True, True, True, True, False, False, False, False, False]
 
-        "A": [True, True, True, True, True, True, True, False, False, False],
-        "B": [False, False, False, False, False, False, False, True, False, False],
-        "C": [False, False, False, False, False, False, False, False, True, False],
-        "D": [False, False, False, False, False, False, False, False, False, True]
+
+        # "A": [True, True, True, True, True, True, True, False, False, False],
+        # "B": [False, False, False, False, False, False, False, True, False, False],
+        # "C": [False, False, False, False, False, False, False, False, True, False],
+        # "D": [False, False, False, False, False, False, False, False, False, True]
+
+        "A": [True, True, True, False, True, True, True, False, False, False],
+        "B": [False, False, False, True, False, False, False, False, False, False],
+        "C": [False, False, False, False, True, False, False, False, False, False],
+        "D": [False, False, False, False, False, False, True, False, False, False]
 
         # "A": [True, True, True, True, True, False, False, False, False, False],
         # "B": [False, True, False, True, True, True, True, False, False, False],
@@ -100,7 +106,7 @@ class Kings:
         if name == "A":
             self.batch_size = 100
         else:
-            self.batch_size = 80
+            self.batch_size = 100
         self.name = name
 
         if algorithm == "gossip":
@@ -146,15 +152,15 @@ class Kings:
         self.logger.info('Training start!!')
         criterion = nn.CrossEntropyLoss()
         if self.name == 'A':
-            # scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
+            scheduler = torch.optim.lr_scheduler.StepLR(
+                self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
             # scheduler = CosineLRScheduler(self.optimizer, t_initial=100, lr_min=2e-5, warmup_t=10, warmup_lr_init=5e-5, warmup_prefix=True)
-            scheduler = StepLRScheduler(
-                self.optimizer, decay_t=10, warmup_t=10, warmup_lr_init=1e-4, decay_rate=0.8)
+            # scheduler = StepLRScheduler(self.optimizer, decay_t=10, warmup_t=10, warmup_lr_init=1e-4, decay_rate=0.8)
         else:
-            # scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
+            scheduler = torch.optim.lr_scheduler.StepLR(
+                self.optimizer, step_size=10, gamma=0.95, last_epoch=100)
             # scheduler = CosineLRScheduler(self.optimizer, t_initial=100, lr_min=2e-5, warmup_t=10, warmup_lr_init=5e-5, warmup_prefix=True)
-            scheduler = StepLRScheduler(
-                self.optimizer, decay_t=10, warmup_t=10, warmup_lr_init=1e-4, decay_rate=0.6)
+            # scheduler = StepLRScheduler(self.optimizer, decay_t=10, warmup_t=10, warmup_lr_init=1e-4, decay_rate=0.6)
 
         for epoch in range(max_epoch):   # loop over the dataset multiple times
             running_loss = 0.0
@@ -184,14 +190,14 @@ class Kings:
 
             end_time = time.time()
 
-            # scheduler.step()
+            scheduler.step()
             '''
             if self.name == "A":
                 scheduler.step()
             else:
                 scheduler.step(epoch+1)
             '''
-            scheduler.step(epoch+1)
+            # scheduler.step(epoch+1)
 
             self.latest_epoch = epoch + 1
             latest_loss = running_loss / epc_cnt
